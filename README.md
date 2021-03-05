@@ -40,3 +40,24 @@ The radical growth for images happens at the eighth volume, when almost every ot
 
 The decrease is partly due to the magazine’s transition from monthly to quarterly in the autumn of 1921, which brings down the numbers for all entries. The surge of images, considering this general decrease in numbers, appears all the more dramatic. One reason for this surge is that the magazine is turning its focus onto visual arts, publishing artworks from the Avant Garde groups such as Dadaists. Data from after the eighth volume would be helpful to see if the dominance of images persists. 
 
+# Author distribution in fiction and poetry
+![image](https://user-images.githubusercontent.com/66805543/110164615-7374a700-7da6-11eb-95d8-cc3dfa3eff33.png)
+![image](https://user-images.githubusercontent.com/66805543/110164656-84251d00-7da6-11eb-8874-39bb4986fa50.png)
+
+These two graphs show the distribution of authors whose works have formed a majority in number among all the poetry and fiction works. 
+
+One of the main purposes for creating this magazine, for Anderson, is to give space for artists’ works that cannot find their space elsewhere. Many writers whom are considered to be the typical or canonical modernists (Lowell, Pound, Joyce, Yeats) occupy a large proportion. 
+
+Some authors are published posthumously, such as Rimbaud and Po, which points us to the inspiration for modernists, or precursors for modernism. Modernist writers look to modern works in France or ancient works in China for new forms of expression in literature. Pound is famous for his interpretation and adoption of Chinese poetry. 
+
+# Author(published ove 10 times) distribution over time
+![image](https://user-images.githubusercontent.com/66805543/110164724-9e5efb00-7da6-11eb-9462-3f4a094cdbf7.png)
+![image](https://user-images.githubusercontent.com/66805543/110164739-a4ed7280-7da6-11eb-81b0-573adbaae7a1.png)
+These two graphs look at the temporal changes of published authors. 
+
+I took two groups of authors: who were published more than 20 times through eight years, and who were published between 10 and 20 times.
+
+I wish to discover patterns that reveal editorial preferences of the magazine—who or what kinds of writers/artists they decided to publish at a certain time. The most published authors overlap with the core editors—Anderson, Pound (foreign editor), Heap(co-editor), Rodker (foreign editor.) They are also the authors who have been published through a longer period. Most authors’ works are published in the range of less than 4 volumes. 
+
+From the graphs we can see who the long-time favorites of the editors are, and who are the authors that get published frequently in a short period, but later disappear from the volumes. The frequency and time span of the published works indicates the interaction between the authors and the chief editors of the group. 
+
