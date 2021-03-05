@@ -1,0 +1,235 @@
+---
+title: "ProjectTest"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Generating table
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("dplyr")
+library(dplyr)
+install.packages("data.table")
+library(data.table)
+install.packages("scales")
+library(scales)
+setwd("/Users/danjingrong/Downloads/project 3")
+table <- read.table(file("/Users/danjing/Downloads/project 3/Little Review_3.everycontributor.txt"),  sep ="|", header = TRUE, quote="\n",dec =".")
+
+dim(table)
+colnames(table)
+table1 <- table[,1:7 ]
+table(table1$genre)
+list(table[,3])
+table(table1$contributor)
+
+title1 <- read.csv(file("/Users/danjing/Downloads/project 3/Little Review_2.everytitle.txt"), 
+                      sep ="|", header = TRUE, quote="\n",dec =".",stringsAsFactors = FALSE)
+title1<- read.csv(file = ("/Users/danjing/Downloads/project 3//title1.csv"))
+#title1<-title1[title1$title != "Contents",]
+
+
+colnames(title1)
+select <- c(1,4:9)
+title1 <- title1[-4,1:9]
+genrecount <- table(title1$genre)
+genrecount<-as.data.frame(genrecount)
+genrecount<-genrecount[-5, ]
+colnames(genrecount)<- c("genre","frequency")
+ggplot(data=genrecount,aes(x=genre, y=frequency,fill=genre)) + geom_bar(stat="identity")+geom_text(aes(label=frequency), vjust=-0.7, color = "red", position = position_dodge(0.5), size=3.5)+theme_minimal() + ggtitle("Genre distribution in Little Review 1914-1922")
+
+ggsave("genrecount.pdf")
+
+
+#distribution of genres in different volumes
+vol1<-title1[1:570,]
+genrecount1<-table(vol1$genre)
+genrecount1<-as.data.frame(genrecount1)
+
+vol2<-title1[571:911,]
+genrecount2<-table(vol2$genre)
+genrecount2<-as.data.frame(genrecount2)
+
+vol3<-title1[912:1176,]
+genrecount3<-table(vol3$genre)
+genrecount3<-as.data.frame(genrecount3)
+Var1<-"drama"
+Freq<-"0"
+dra<-data_frame(Var1, Freq)
+genrecount3<-rbind(genrecount3,dra)
+
+
+vol4<-title1[1177:1489,]
+genrecount4<-table(vol4$genre)
+genrecount4<-as.data.frame(genrecount4)
+
+vol5<-title1[1490:1824,]
+genrecount5<-table(vol5$genre)
+genrecount5<-as.data.frame(genrecount5)
+
+vol6<-title1[1825:2108,]
+genrecount6<-table(vol6$genre)
+genrecount6<-as.data.frame(genrecount6)
+
+vol7<-title1[2109:2269,]
+genrecount7<-table(vol7$genre)
+genrecount7<-as.data.frame(genrecount7)
+Var1<-"drama"
+Freq<-"0"
+dra<-data_frame(Var1, Freq)
+genrecount7<-rbind(genrecount7,dra)
+
+vol8<-title1[2270:2487,]
+genrecount8<-table(vol8$genre)
+genrecount8<-as.data.frame(genrecount8)
+
+#ah <- full_join(genrecount1, genrecount2, genrecount3, genrecount4, genrecount5,  genrecount6, genrecount7, genrecount8, by="Var1")
+
+colnames(genrecountbyvol)
+advertisements <- c(22,20,21,25,14,22,8,8)
+articles<-c(407,160,98,79,106,96,46,37)
+drama <- c(3, 4,0,9,1,3,0,3)
+fiction<-c(7,10,8,2,34,43,21,11)
+images<-c(4,2,3,9,26,21,20,101)
+letters<-c(20,22,45,57,48,16,13,25)
+poetry<-c(107,123,90,112,106,83,53,33)
+genrecountbyvol<- data.frame(advertisements,articles,drama,fiction,images,letters,poetry, stringsAsFactors = FALSE)
+row.names(genrecountbyvol)<-c(1:8)
+genrecountbyvol
+# lines(genrecountbyvol~advertisements)
+
+#plot the changes of genres over time
+genrevol<-data.frame(genre=rep(c( "advertisements", "articles" ,"drama", "fiction", "images","letters","poetry"),each=8),
+                     volume=rep(c(1:8),7),
+                     frequency=c(22,20,21,25,14,22,8,8,407,160,98,79,106,96,46,37,3, 4,0,9,1,3,0,3,7,10,8,2,34,43,21,11,4,2,3,9,26,21,20,101,20,22,45,57,48,16,13,25,107,123,90,112,106,83,53,33))
+
+ggplot(genrevol,aes(x=volume,y=frequency,group=genre)) + geom_line(aes(color=genre)) +geom_point(aes(color=genre))+ ggtitle("Genre changes over volumes in Little Review 1914-1922")
+ggsave("genrevol.pdf",plot=last_plot())
+
+#get rid of the articles
+genrevol1<-data.frame(genre=rep(c( "advertisements", "drama", "fiction", "images","letters","poetry"),each=8),
+                     volume=rep(c(1:8),6),
+                     frequency=c(22,20,21,25,14,22,8,8,3, 4,0,9,1,3,0,3,7,10,8,2,34,43,21,11,4,2,3,9,26,21,20,101,20,22,45,57,48,16,13,25,107,123,90,112,106,83,53,33))
+
+ggplot(genrevol1,aes(x=volume,y=frequency,group=genre)) + geom_line(aes(color=genre)) +geom_point(aes(color=genre))+ ggtitle("Genre changes over volumes in Little Review 1914-1922--Without the articles")
+ggsave("genrevol1.pdf",plot=last_plot())
+
+
+
+
+
+
+#subsetting all the poetry
+filter(title1, genre =="poetry")
+poetry <- title1[which(title1$genre == " poetry "),]
+
+head(articles1)
+class(title1)
+
+table2$genre == "articles"
+articles<-subset(title1, genre== " articles ")
+
+#plot author and time
+title1<- read.csv(file = ("/Users/danjing/Downloads/project 3//title1.csv"))
+title1$creator <- gsub("Pound, Ezra  ", "Pound, Ezra ", title1$creator)
+title1$creator <- gsub("De Bossch\x92\xe5re, Jean ", "De Bosschere, Jean ", title1$creator)
+title1$creator <- gsub("Pound, Ezra ", "Pound, Ezra", title1$creator)
+authorcount <- table(title1$creator)
+authorcount <- as.data.frame(authorcount)
+colnames(authorcount)<-c("author","frequency")
+authorcount<-authorcount[order(-authorcount$frequency), ]
+authorcount$author <- as.character(authorcount$author)
+
+#authors published more than 10 times
+over10times <- c(authorcount$author[2:42])
+over10timesrows<-title1[title1$creator %in% over10times, ]
+#transfer date column to dates
+class(over10timesrows$date)
+over10timesrows$date<- as.Date(over10timesrows$date, format="%Y-%m-%d")
+class(over10timesrows$date)
+#author and time scatterplot
+over10timesrows %>%
+  mutate(class = fct_reorder(creator, date, .fun='length')) %>%
+
+ggplot(over10timesrows, aes(x=date, y=creator)) +
+  geom_point(size=1, shape=18)
+
+
+
+#subset the data by years
+title1
+class(title1$date)
+title1$date<- as.Date(title1$date, format="%Y-%m-%d")
+class(title1$date)
+p<-ggplot(title1[1:100,], aes(x=date, y=creator,fill=creator)) + 
+  geom_dotplot(binaxis='y', stackdir='center')
+p
+
+install.packages("openair")
+library(openair)
+date.1914 <- selectByDate(title1, year = 1914)
+
+
+#distribution of authors
+
+read.csv("/Users/danjing/Downloads/project\ 2/Fictions.xlsx ",header = TRUE, stringsAsFactors = FALSE)
+authorcount <- table(Fictions$Author)
+authorcount<-as.data.frame(authorcount)
+colnames(authorcount)<-c("author","frequency")
+authorcount<-authorcount[order(-authorcount$frequency), ]
+#156 entries of fictions
+summary(authorcount)
+#top 10 writers contribute 97 times to the magazine, 97/152
+authorcount<-authorcount[1:10,]
+
+
+bp<- ggplot(data=authorcount, aes(x="", y=frequency,fill=author))+
+geom_bar(width = 1, stat = "identity")+theme_minimal() + ggtitle("Author distribution in 97 fictions out of 152 total")+ scale_x_discrete(labels = abbreviate)
+bp
+pie<-bp + coord_polar("y",start = 0)
+pie
+ggsave("authorcountpie.pdf",plot = last_plot())
+
+
+#poetry
+poetry <- read_excel("poetry.xlsx")
+authorcount <- table(poetry$creator)
+authorcount<-as.data.frame(authorcount)
+colnames(authorcount)<-c("author","frequency")
+authorcount<-authorcount[order(-authorcount$frequency), ]
+#156 entries of fictions
+summary(authorcount)
+#top 10 writers contribute 97 times to the magazine, 97/152
+authorcount<-authorcount[1:20,]
+
+
+bp<- ggplot(data=authorcount, aes(x=author, y=frequency,fill=author))+
+geom_bar(width = 0.75, stat = "identity")+theme_minimal() + ggtitle("Top 20 Authors with Most Poetry Works")+ scale_x_discrete(labels = abbreviate)+geom_text(aes(label=frequency), vjust=-0.7, color = "red", position = position_dodge(0.5), size=3.5)
+bp
+
+bp<- ggplot(data=authorcount, aes(x="", y=frequency,fill=author))+
+geom_bar(width = 0.75, stat = "identity")+theme_minimal() + ggtitle("Top 20 Authors with Most Poetry Works")
+pie<-bp + coord_polar("y",start = 0)
+pie
+ggsave("poetrycount.pdf",plot = last_plot())
+
+
+#extract the lines of most published poets
+writers <- as.vector(authorcount$author)
+class(writers)
+writers
+poetry[poetry$creator==writers,]
+
+
+
+
+
+```
+#http://www.sthda.com/english/wiki/ggplot2-pie-chart-quick-start-guide-r-software-and-data-visualization
+
